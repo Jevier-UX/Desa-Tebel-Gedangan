@@ -18,18 +18,26 @@ use App\Http\Controllers\Admin\SuratKeteranganController as AdminSuratKeterangan
 use App\Http\Controllers\Admin\PerizinanUsahaController as AdminPerizinanUsahaController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
 
+// Beranda Utama
 Route::get('/', function () {
-    return view('welcome');
+    $beritaTerbaru = Berita::latest()->take(3)->get();
+    $perangkatList = PerangkatDesa::orderBy('urutan', 'asc')->get();
+    return view('welcome', compact('beritaTerbaru', 'perangkatList'));
 })->name('home');
 
+// Profil Desa
 Route::get('/profil-desa', function () {
-    return view('profil');
+    $perangkatList = PerangkatDesa::orderBy('urutan', 'asc')->get();
+    return view('profile', compact('perangkatList'));
 })->name('profil');
 
-Route::get('/', function () {
-    $beritaTerbaru = Berita::orderBy('created_at', 'desc')->take(3)->get();
-    return view('welcome', compact('beritaTerbaru'));
-})->name('home');
+Route::get('/profil', function () {
+    return redirect()->route('profil');
+});
+
+Route::get('/profile', function () {
+    return redirect()->route('profil');
+});
 
 // Layanan Administrasi Kependudukan
 Route::get('/administrasi-kependudukan', [AdministrasiKependudukanController::class, 'index'])
@@ -56,14 +64,6 @@ Route::get('/status-permohonan', [TrackingLayananController::class, 'index'])
 // Berita
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
-
-// Perangkat Desa
-Route::get('/', function () {
-    $beritaTerbaru = Berita::latest()->take(3)->get();
-    $perangkatList = PerangkatDesa::orderBy('urutan', 'asc')->get();
-    return view('welcome', compact('beritaTerbaru', 'perangkatList'));
-
-})->name('home');
 
 // Kelola Perangkat Desa
 Route::get('/admin/perangkat', [PerangkatDesaController::class, 'index'])->name('admin.perangkat.index');

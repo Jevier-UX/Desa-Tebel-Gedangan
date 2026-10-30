@@ -8,4 +8,44 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-secondary-dark: #064E3B;
+    --color-secondary-mid: #0D7249;
+    --color-secondary-light: #10B981;
+}
+
+@layer utilities {
+    .bg-secondary-gradient {
+        background: linear-gradient(135deg, #064E3B 0%, #0D7249 50%, #10B981 100%) !important;
+    }
+    .bg-secondary-gradient-hover:hover {
+        background: linear-gradient(135deg, #04382A 0%, #064E3B 50%, #059669 100%) !important;
+    }
+    .text-secondary-gradient {
+        background: linear-gradient(135deg, #064E3B 0%, #0D7249 50%, #10B981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .dark .text-secondary-gradient {
+        background: linear-gradient(135deg, #34D399 0%, #10B981 50%, #6EE7B7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .glass {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .dark .glass {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-card {
+        background: #FFFFFF;
+        border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .dark .glass-card {
+        background: rgba(26, 34, 52, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 }
